@@ -7,10 +7,9 @@ Die dice6;
 Die dice7;
 Die dice8;
 Die dice9;
+int sum;
 
-void setup(){
-  //no loop means that draw is only called once
-  //OR if you ever call redraw()
+void setup() {
   size(500, 600);
   noLoop();
   dice1 = new Die(0, 0);
@@ -22,12 +21,21 @@ void setup(){
   dice7 = new Die(0, 400);
   dice8 = new Die(200, 400);
   dice9 = new Die(400, 400);
-  
+  sum = 0;
 }
 
-void draw(){
-  //your code here
+void draw() {
   background(78, 193, 83);
+  dice1.roll();
+  dice2.roll();
+  dice3.roll();
+  dice4.roll();
+  dice5.roll();
+  dice6.roll();
+  dice7.roll();
+  dice8.roll();
+  dice9.roll();
+
   dice1.show();
   dice2.show();
   dice3.show();
@@ -37,49 +45,76 @@ void draw(){
   dice7.show();
   dice8.show();
   dice9.show();
+  
+  textSize(20);
+  text("The total is: " + sum, 100, 550);
 }
 
-void mousePressed(){
-  //No real work for you to do here
-  //calling redraw will do the necessary work 
-  //to redraw your processing script
+void mousePressed() {
   redraw();
+  sum = 0;
 }
 
 
 //Dice: Models a single 6 sided dice cube
 //Each instance should randomly assign itself a value from 1 to 6
 class Die {
-	//variable declarations for your Die instances here
   int outcome;
   int x_pos, y_pos;
-	
-	//constructor
-	Die(int x, int y){
+
+  //constructor
+  Die(int x, int y) {
     x_pos = x;
     y_pos = y;
-		//variable initializations here
-	}
-	
-	//Simulate a roll of a die
-	void roll(){
-		//your code here, 
-		//should randomly assign a value from 1 to 6
-    int outcome = (int)Math.random() * 6 + 1;
-	}
+  }
 
-  
-	
-	/*
+  //Simulate a roll of a die
+  void roll() {
+    outcome = (int)(Math.random() * 6 + 1);
+  }
+
+
+
+  /*
 	  Use the randomly assigned roll value to draw the face of a die
-	*/
-	void show(){
-		//your code here
-    pushMatrix();
+   	*/
+  void show() {
     fill(255);
-    rect(x_pos, y_pos, 100, 100, 10);
+    rect(x_pos, y_pos, 100, 100, 15);
     fill(0);
-    ellipse(x_pos + 50, y_pos + 50, 10, 10);
-    popMatrix();
-	}
+    if (outcome == 1) {
+      ellipse(x_pos + 50, y_pos + 50, 10, 10);
+      sum += 1;
+    } else if (outcome == 2) {
+      ellipse(x_pos + 20, y_pos + 20, 10, 10);
+      ellipse(x_pos + 80, y_pos + 80, 10, 10);
+      sum += 2;
+    } else if (outcome == 3) {
+      ellipse(x_pos + 20, y_pos + 20, 10, 10);
+      ellipse(x_pos + 50, y_pos + 50, 10, 10);
+      ellipse(x_pos + 80, y_pos + 80, 10, 10);
+      sum += 3;
+    } else if (outcome == 4) {
+      ellipse(x_pos + 20, y_pos + 20, 10, 10);
+      ellipse(x_pos + 20, y_pos + 80, 10, 10);
+      ellipse(x_pos + 80, y_pos + 80, 10, 10);
+      ellipse(x_pos + 80, y_pos + 20, 10, 10);
+      sum += 4;
+    } else if (outcome == 5) {
+      ellipse(x_pos + 20, y_pos + 20, 10, 10);
+      ellipse(x_pos + 20, y_pos + 80, 10, 10);
+      ellipse(x_pos + 50, y_pos + 50, 10, 10);
+      ellipse(x_pos + 80, y_pos + 80, 10, 10);
+      ellipse(x_pos + 80, y_pos + 20, 10, 10);
+      sum += 5;
+    } else {
+      ellipse(x_pos + 20, y_pos + 20, 10, 10);
+      ellipse(x_pos + 20, y_pos + 80, 10, 10);
+      ellipse(x_pos + 80, y_pos + 80, 10, 10);
+      ellipse(x_pos + 80, y_pos + 20, 10, 10);
+      ellipse(x_pos + 80, y_pos + 80, 10, 10);
+      ellipse(x_pos + 80, y_pos + 20, 10, 10);
+      sum += 6;
+    }
+  }
 }
