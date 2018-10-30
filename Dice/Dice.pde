@@ -51,8 +51,8 @@ void draw() {
 }
 
 void mousePressed() {
-  redraw();
   sum = 0;
+  redraw();
 }
 
 
@@ -110,10 +110,10 @@ class Die {
     } else {
       ellipse(x_pos + 20, y_pos + 20, 10, 10);
       ellipse(x_pos + 20, y_pos + 80, 10, 10);
-      ellipse(x_pos + 80, y_pos + 80, 10, 10);
+      ellipse(x_pos + 80, y_pos + 50, 10, 10);
       ellipse(x_pos + 80, y_pos + 20, 10, 10);
       ellipse(x_pos + 80, y_pos + 80, 10, 10);
-      ellipse(x_pos + 80, y_pos + 20, 10, 10);
+      ellipse(x_pos + 20, y_pos + 50, 10, 10);
       sum += 6;
     }
   }
